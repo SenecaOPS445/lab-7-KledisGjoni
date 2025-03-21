@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# Student ID: [seneca_id]
+# Student ID: kgjoni
 class Time:
     """Simple object type for time of the day.
        data attributes: hour, minute, second
@@ -21,9 +21,7 @@ class Time:
         """Add two time objests and return the sum."""
         """Change this to become object method for our Time object (refer to lab7c.py and change_time() method below)"""
         total_seconds = self.time_to_sec() + t2.time_to_sec()
-        sum = sec_to_time(total_seconds)
-        self.hour, self.minute, self.second = sum.hour, sum.minute, sum.second
-        return sum
+        return sec_to_time(total_seconds)
 
     def change_time(self, seconds):
         time_seconds = self.time_to_sec()
@@ -47,9 +45,17 @@ class Time:
            return False
         return True
 
+    def __str__(self):
+        '''return a string representation for the object self'''
+        return f'{self.hour:02d}:{self.minute:02d}:{self.second:02d}'
+    def __repr__(self):
+        '''return a string representation for the object self'''
+        '''just instead of ':', you are required use the '.'  in the formatting string.'''
+        return f'{self.hour:02d}.{self.minute:02d}.{self.second:02d}'
+    def __add__(self, t2):
+        """return the result by using sum_times() method"""
+        return self.sum_times(t2)
 def sec_to_time(seconds):
-    '''convert a given number of seconds to a time object in 
-       hour, minute, second format'''
     minutes, seconds = divmod(seconds, 60)
     hours, minutes = divmod(minutes, 60)
     return Time(hours, minutes, seconds)
